@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: garfield-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    envVars:
+      - key: DISCORD_PUBLIC_KEY
+        sync: false   # mark as secret – you'll paste the value in the Render dashboard
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
