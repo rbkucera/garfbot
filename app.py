@@ -44,7 +44,9 @@ def fetch_comic_url(date: datetime.date) -> str | None:
     iso = date.strftime("%Y-%m-%d")
     api_url = f"https://www.gocomics.com/api/service/v2/assets/recent/garfield?date={iso}"
     try:
-        resp = requests.get(api_url, timeout=10)
+        resp = requests.get(api_url, timeout=10, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        })
         resp.raise_for_status()
         data = resp.json()
         return data[0]["url"] if data else None
